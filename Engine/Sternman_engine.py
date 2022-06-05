@@ -9,8 +9,8 @@ Created on Mon May 30 01:17:52 2022
 from Engine.engine import Engine
 
 class sternman(Engine):
-    def __init__(self, WarningLightsOn):
-        self.WarningLightsOn = WarningLightsOn
+    def __init__(self, parameter):
+        self.WarningLightsOn = parameter['engineLight']
         
     def needService(self):
         if self.WarningLightsOn:

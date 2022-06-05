@@ -5,7 +5,7 @@ class car(Serviceable, ABC):
     def __init__(self, model: str):
         self.model = model
         self.services = {}
-        self.parameters : dict
+        self.parameters : dict = None
 
     # @abstractmethod
     def modelName(self):
@@ -18,18 +18,22 @@ class car(Serviceable, ABC):
     def setService(self, serviceName: str, service: object) -> None:
         self.services[serviceName] = service
 
+
+    # @abstractmethod
+    def addParameter(self, parameterName: str, parameterValue) -> None:
+        self.parameters[parameterName] = parameterValue
+        
+    # @abstractmethod
+    def getParameters(self):
+        return self.parameters
+        
+    def initParameters(self, parameters):
+        self.parameters = parameters
+    
     # @abstractmethod
     def needService(self):
         for service in self.services.values():
             if service.needService():
                 return True
         return False
-
-    # @abstractmethod
-    def setParameters(self, parameterName: str, parameterType = None) -> None:
-        self.parameters[parameterName] = parameterType
-        
-    def initParameters(self, parameters):
-        self.parameters = parameters
-    
 

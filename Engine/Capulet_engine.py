@@ -9,9 +9,9 @@ Created on Mon May 30 01:17:28 2022
 from Engine.engine import Engine
     
 class capulet(Engine):
-    def __init__(self, currentMiles, lastServicedMiles):
-        self.currentMiles = currentMiles
-        self.lastServicedMiles = lastServicedMiles
+    def __init__(self, parameter):
+        self.currentMiles = parameter['currentMiles']
+        self.lastServicedMiles = parameter['lastServiceMiles']
         
     def needService(self):
         return self.currentMiles - self.lastServicedMiles > 30000

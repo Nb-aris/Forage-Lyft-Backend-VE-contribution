@@ -10,7 +10,7 @@ import unittest
 
 from datetime import datetime
 
-from car import car
+# from car import car
 
 # from Engine.Capulet_engine import capulet
 # from Engine.Sternman_engine import sternman
@@ -20,7 +20,7 @@ from car import car
 # from Tires.carrigan_tires import CarriganTires
 # from Tires.octoprime_tires import OctoprimeTires
 
-from carInvetory import capulet, sternman, willoughby, nubbin, spindler
+from carFactory import Model
 
 class testcalliope(unittest.TestCase):
     """
@@ -51,18 +51,14 @@ class testcalliope(unittest.TestCase):
             }
     
         
-        car1 = car('calliope')
-        car2 = car('calliope')
+        car1 = Model.calliope(parameters)
+        car2 = Model.calliope(parameters)
         
         
-        car1.setService('engine', capulet(parameters['currentMiles'], parameters['lastServiceMiles']))
-        car1.setService('battery', spindler(parameters['currentDate'], parameters['lastServiceDate']))
-        car2.setService('engine', willoughby(parameters['currentMiles'], parameters['lastServiceMiles']))
-        car2.setService('battery', nubbin(parameters['currentDate'], parameters['lastServiceDate']))
         
         # self.assertEqual(car1, car2, 'checking')
-        self.assertNotEqual(car2.serviceAvailable('engine'), 'capulet engine')
-        self.assertNotEqual(car2.serviceAvailable('battery'), 'spindler battery')
+        # self.assertNotEqual(car2.serviceAvailable('engine'), 'capulet engine')
+        # self.assertNotEqual(car2.serviceAvailable('battery'), 'spindler battery')
         self.assertEqual(car1.modelName(), car2.modelName())
         self.assertTrue(car1.needService())
         
@@ -95,10 +91,8 @@ class testcalliope(unittest.TestCase):
             }
     
         
-        car1 = car('calliope')
+        car1 = Model.calliope(parameters)
         
-        car1.setService('engine', capulet(parameters['currentMiles'], parameters['lastServiceMiles']))
-        car1.setService('battery', spindler(parameters['currentDate'], parameters['lastServiceDate']))
         
         self.assertFalse(car1.needService())
         
@@ -131,10 +125,8 @@ class testcalliope(unittest.TestCase):
             }
     
         
-        car1 = car('calliope')
+        car1 = Model.calliope(parameters)
         
-        car1.setService('engine', capulet(parameters['currentMiles'], parameters['lastServiceMiles']))
-        car1.setService('battery', spindler(parameters['currentDate'], parameters['lastServiceDate']))
         
         self.assertTrue(car1.needService())
         
@@ -168,10 +160,8 @@ class testcalliope(unittest.TestCase):
             }
     
         
-        car1 = car('calliope')
+        car1 = Model.calliope(parameters)
         
-        car1.setService('engine', capulet(parameters['currentMiles'], parameters['lastServiceMiles']))
-        car1.setService('battery', spindler(parameters['currentDate'], parameters['lastServiceDate']))
         
         self.assertFalse(car1.needService())
         
@@ -217,10 +207,8 @@ class testglissade(unittest.TestCase):
     
         
         
-        car1 = car('glissade')
+        car1 = Model.glissade(parameters)
         
-        car1.setService('engine', willoughby(parameters['currentMiles'], parameters['lastServiceMiles']))
-        car1.setService('battery', spindler(parameters['currentDate'], parameters['lastServiceDate']))
         
         self.assertTrue(car1.needService())
         
@@ -255,10 +243,8 @@ class testglissade(unittest.TestCase):
     
         
         
-        car1 = car('glissade')
+        car1 = Model.glissade(parameters)
         
-        car1.setService('engine', willoughby(parameters['currentMiles'], parameters['lastServiceMiles']))
-        car1.setService('battery', spindler(parameters['currentDate'], parameters['lastServiceDate']))
         
         self.assertFalse(car1.needService())
         
@@ -292,10 +278,7 @@ class testglissade(unittest.TestCase):
     
         
         
-        car1 = car('glissade')
-        
-        car1.setService('engine', willoughby(parameters['currentMiles'], parameters['lastServiceMiles']))
-        car1.setService('battery', spindler(parameters['currentDate'], parameters['lastServiceDate']))
+        car1 = Model.glissade(parameters)
         
         self.assertTrue(car1.needService())
         
@@ -330,10 +313,7 @@ class testglissade(unittest.TestCase):
     
         
         
-        car1 = car('glissade')
-        
-        car1.setService('engine', willoughby(parameters['currentMiles'], parameters['lastServiceMiles']))
-        car1.setService('battery', spindler(parameters['currentDate'], parameters['lastServiceDate']))
+        car1 = Model.glissade(parameters)
         
         self.assertFalse(car1.needService())
         
@@ -377,12 +357,9 @@ class testpalindrome(unittest.TestCase):
     
         
         
-        car1 = car('palindrome')
+        parameters['engineLight'] = True
+        car1 = Model.palindrome(parameters)
         
-        parameters['engineLight']  = True
-        
-        car1.setService('engine', sternman(parameters['engineLight']))
-        car1.setService('battery', spindler(parameters['currentDate'], parameters['lastServiceDate']))
         
         self.assertTrue(car1.needService())
         
@@ -416,13 +393,11 @@ class testpalindrome(unittest.TestCase):
             }
     
         
+        parameters['engineLight'] = False
+        car1 = Model.palindrome(parameters)
         
-        car1 = car('palindrome')
         
-        parameters['engineLight']  = False
         
-        car1.setService('engine', sternman(parameters['engineLight']))
-        car1.setService('battery', spindler(parameters['currentDate'], parameters['lastServiceDate']))
         
         self.assertFalse(car1.needService())
         
@@ -455,13 +430,10 @@ class testpalindrome(unittest.TestCase):
             }
     
         
+        parameters['engineLight'] = True
+        car1 = Model.palindrome(parameters)
         
-        car1 = car('palindrome')
         
-        parameters['engineLight']  = True
-        
-        car1.setService('engine', sternman(parameters['engineLight']))
-        car1.setService('battery', spindler(parameters['currentDate'], parameters['lastServiceDate']))
         
         self.assertTrue(car1.needService())
         
@@ -495,13 +467,11 @@ class testpalindrome(unittest.TestCase):
             }
     
         
+        parameters['engineLight'] = False
+        car1 = Model.palindrome(parameters)
         
-        car1 = car('palindrome')
         
-        parameters['engineLight']  = False
         
-        car1.setService('engine', sternman(parameters['engineLight']))
-        car1.setService('battery', spindler(parameters['currentDate'], parameters['lastServiceDate']))
         
         self.assertFalse(car1.needService())
         
@@ -547,10 +517,8 @@ class testrorschach(unittest.TestCase):
     
         
         
-        car1 = car('rorschach')
+        car1 = Model.rorschach(parameters)
         
-        car1.setService('engine', willoughby(parameters['currentMiles'], parameters['lastServiceMiles']))
-        car1.setService('battery', nubbin(parameters['currentDate'], parameters['lastServiceDate']))
         
         
         self.assertTrue(car1.needService())
@@ -586,11 +554,7 @@ class testrorschach(unittest.TestCase):
     
         
         
-        car1 = car('rorschach')
-        
-        car1.setService('engine', willoughby(parameters['currentMiles'], parameters['lastServiceMiles']))
-        car1.setService('battery', nubbin(parameters['currentDate'], parameters['lastServiceDate']))
-        
+        car1 = Model.rorschach(parameters)
         
         
         self.assertFalse(car1.needService())
@@ -625,10 +589,7 @@ class testrorschach(unittest.TestCase):
     
         
         
-        car1 = car('rorschach')
-        
-        car1.setService('engine', willoughby(parameters['currentMiles'], parameters['lastServiceMiles']))
-        car1.setService('battery', nubbin(parameters['currentDate'], parameters['lastServiceDate']))
+        car1 = Model.rorschach(parameters)
         
         self.assertTrue(car1.needService())
         
@@ -663,10 +624,7 @@ class testrorschach(unittest.TestCase):
     
         
         
-        car1 = car('rorschach')
-        
-        car1.setService('engine', willoughby(parameters['currentMiles'], parameters['lastServiceMiles']))
-        car1.setService('battery', nubbin(parameters['currentDate'], parameters['lastServiceDate']))
+        car1 = Model.rorschach(parameters)
         
         self.assertFalse(car1.needService())
         
@@ -710,10 +668,8 @@ class testthovex(unittest.TestCase):
             'lastServiceMiles': 0
             }
         
-        car1 = car('thovex')
+        car1 = Model.thovex(parameters)
         
-        car1.setService('engine', capulet(parameters['currentMiles'], parameters['lastServiceMiles']))
-        car1.setService('battery', nubbin(parameters['currentDate'], parameters['lastServiceDate']))
         
         self.assertTrue(car1.needService())
         
@@ -746,10 +702,7 @@ class testthovex(unittest.TestCase):
             'lastServiceMiles': 0
             }
         
-        car1 = car('thovex')
-        
-        car1.setService('engine', capulet(parameters['currentMiles'], parameters['lastServiceMiles']))
-        car1.setService('battery', nubbin(parameters['currentDate'], parameters['lastServiceDate']))
+        car1 = Model.thovex(parameters)
         
         self.assertFalse(car1.needService())
         
@@ -781,10 +734,7 @@ class testthovex(unittest.TestCase):
             'lastServiceMiles': 0
             }
         
-        car1 = car('thovex')
-        
-        car1.setService('engine', capulet(parameters['currentMiles'], parameters['lastServiceMiles']))
-        car1.setService('battery', nubbin(parameters['currentDate'], parameters['lastServiceDate']))
+        car1 = Model.thovex(parameters)
         
         self.assertTrue(car1.needService())
         
@@ -817,10 +767,7 @@ class testthovex(unittest.TestCase):
             'lastServiceMiles': 0
             }
         
-        car1 = car('thovex')
-        
-        car1.setService('engine', capulet(parameters['currentMiles'], parameters['lastServiceMiles']))
-        car1.setService('battery', nubbin(parameters['currentDate'], parameters['lastServiceDate']))
+        car1 = Model.thovex(parameters)
         
         self.assertFalse(car1.needService())
         

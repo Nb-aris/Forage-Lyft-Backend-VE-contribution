@@ -9,9 +9,9 @@ Created on Mon May 30 01:18:15 2022
 from Engine.engine import Engine
 
 class willoughby(Engine):
-    def __init__(self, currentMiles, lastServicedMiles):
-        self.currentMiles = currentMiles
-        self.lastServicedMiles = lastServicedMiles
+    def __init__(self, parameter):
+        self.currentMiles = parameter['currentMiles']
+        self.lastServicedMiles = parameter['lastServiceMiles']
         
     def needService(self):
         return self.currentMiles - self.lastServicedMiles > 60000
