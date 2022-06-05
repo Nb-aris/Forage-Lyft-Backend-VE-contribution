@@ -29,11 +29,12 @@ class testcalliope(unittest.TestCase):
     """
     
     
-    print('.......testing calliope''\'s'' fleet........................')
-    print()
     i = 1
     
     def testBattery_should_be_serviced(self):
+        print ('\n')
+        print('..............................testing calliope''\'s'' fleet........................')
+        print()
         self.i = testcalliope.i
         print(f'[{self.i}] testing if Battery should be serviced...')
         print()
@@ -75,6 +76,7 @@ class testcalliope(unittest.TestCase):
         print("- - "*18)
         
         testcalliope.i += 1
+        return
         
         
     def testBattery_should_not_be_serviced(self):
@@ -180,7 +182,7 @@ class testcalliope(unittest.TestCase):
         
         print('\tdetails : ', details, '\n')
         print(f'>>> Test[{self.i}] Succesful!\n')
-        print("- - "*18)
+        print("___"*30, '\n')
         
         testcalliope.i += 1
 
@@ -191,11 +193,12 @@ class testglissade(unittest.TestCase):
     """
     # print('testing model glissade')
     
-    print('.......testing glissade''\'s'' fleet........................')
-    print()
     i = 1
     
     def testBattery_should_be_serviced(self):
+        print()
+        print('.............................testing glissade''\'s'' fleet........................')
+        print()
         
         self.i = testglissade.i
         print(f'[{self.i}] testing if Battery should be serviced...')
@@ -341,7 +344,7 @@ class testglissade(unittest.TestCase):
         
         print('\tdetails : ', details, '\n')
         print(f'>>> Test[{self.i}] Succesful!\n')
-        print("- - "*18)
+        print("___"*30, '\n')
         
         testglissade.i += 1
         
@@ -350,11 +353,12 @@ class testpalindrome(unittest.TestCase):
     testing bettery: sternman
             engine:spindler
     """
-    print('.......testing palindrome''\'s'' fleet........................')
-    print()
     i = 1
     
     def testBattery_should_be_serviced(self):
+        print()
+        print('............................testing palindrome''\'s'' fleet........................')
+        print()
         
         self.i = testpalindrome.i
         print(f'[{self.i}] testing if Battery should be serviced...')
@@ -508,7 +512,7 @@ class testpalindrome(unittest.TestCase):
         
         print('\tdetails : ', details, '\n')
         print(f'>>> Test[{self.i}] Succesful!\n')
-        print("- - "*18)
+        print("___"*30, '\n')
         
         testpalindrome.i += 1
 
@@ -519,11 +523,12 @@ class testrorschach(unittest.TestCase):
             engine:spindler
     """
     
-    print('.......testing rorschach''\'s'' fleet........................')
-    print()
     i = 1
     
     def testBattery_should_be_serviced(self):
+        print()
+        print('.......................testing rorschach''\'s'' fleet........................')
+        print()
         
         self.i = testrorschach.i
         print(f'[{self.i}] testing if Battery should be serviced...')
@@ -672,7 +677,7 @@ class testrorschach(unittest.TestCase):
         
         print('\tdetails : ', details, '\n')
         print(f'>>> Test[{self.i}] Succesful!\n')
-        print("- - "*18)
+        print("___"*30, '\n')
         
         testrorschach.i += 1
 
@@ -683,11 +688,12 @@ class testthovex(unittest.TestCase):
             engine:spindler
     """
     
-    print('.......testing thovex''\'s'' fleet........................')
-    print()
     i = 1
     
     def testBattery_should_be_serviced(self):
+        print()
+        print('...............................testing thovex''\'s'' fleet........................')
+        print()
         
         self.i = testthovex.i
         print(f'[{self.i}] testing if Battery should be serviced...')
