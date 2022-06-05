@@ -72,7 +72,7 @@ class testcalliope(unittest.TestCase):
             }
         
         print('\tdetails : ', details, '\n')
-        print(f'>>> Test[{self.i}] Succesful!\n')
+        print(f'>>> Test[{self.i}] Successful!\n')
         print("- - "*18)
         
         testcalliope.i += 1
@@ -108,7 +108,7 @@ class testcalliope(unittest.TestCase):
             }
         
         print('\tdetails : ', details, '\n')
-        print(f'>>> Test[{self.i}] Succesful!\n')
+        print(f'>>> Test[{self.i}] Successful!\n')
         print("- - "*18)
         
         testcalliope.i += 1
@@ -144,7 +144,7 @@ class testcalliope(unittest.TestCase):
             }
         
         print('\tdetails : ', details, '\n')
-        print(f'>>> Test[{self.i}] Succesful!\n')
+        print(f'>>> Test[{self.i}] Successful!\n')
         print("- - "*18)
         
         testcalliope.i += 1
@@ -181,7 +181,7 @@ class testcalliope(unittest.TestCase):
             }
         
         print('\tdetails : ', details, '\n')
-        print(f'>>> Test[{self.i}] Succesful!\n')
+        print(f'>>> Test[{self.i}] Successful!\n')
         print("___"*30, '\n')
         
         testcalliope.i += 1
@@ -230,7 +230,7 @@ class testglissade(unittest.TestCase):
             }
         
         print('\tdetails : ', details, '\n')
-        print(f'>>> Test[{self.i}] Succesful!\n')
+        print(f'>>> Test[{self.i}] Successful!\n')
         print("- - "*18)
         
         testglissade.i += 1
@@ -268,7 +268,7 @@ class testglissade(unittest.TestCase):
             }
         
         print('\tdetails : ', details, '\n')
-        print(f'>>> Test[{self.i}] Succesful!\n')
+        print(f'>>> Test[{self.i}] Successful!\n')
         print("- - "*18)
         
         testglissade.i += 1
@@ -305,7 +305,7 @@ class testglissade(unittest.TestCase):
             }
         
         print('\tdetails : ', details, '\n')
-        print(f'>>> Test[{self.i}] Succesful!\n')
+        print(f'>>> Test[{self.i}] Successful!\n')
         print("- - "*18)
         
         testglissade.i += 1
@@ -343,7 +343,7 @@ class testglissade(unittest.TestCase):
             }
         
         print('\tdetails : ', details, '\n')
-        print(f'>>> Test[{self.i}] Succesful!\n')
+        print(f'>>> Test[{self.i}] Successful!\n')
         print("___"*30, '\n')
         
         testglissade.i += 1
@@ -392,7 +392,7 @@ class testpalindrome(unittest.TestCase):
             }
         
         print('\tdetails : ', details, '\n')
-        print(f'>>> Test[{self.i}] Succesful!\n')
+        print(f'>>> Test[{self.i}] Successful!\n')
         print("- - "*18)
         
         testpalindrome.i += 1
@@ -432,7 +432,7 @@ class testpalindrome(unittest.TestCase):
             }
         
         print('\tdetails : ', details, '\n')
-        print(f'>>> Test[{self.i}] Succesful!\n')
+        print(f'>>> Test[{self.i}] Successful!\n')
         print("- - "*18)
         
         testpalindrome.i += 1
@@ -471,7 +471,7 @@ class testpalindrome(unittest.TestCase):
             }
         
         print('\tdetails : ', details, '\n')
-        print(f'>>> Test[{self.i}] Succesful!\n')
+        print(f'>>> Test[{self.i}] Successful!\n')
         print("- - "*18)
         
         testpalindrome.i += 1
@@ -511,7 +511,7 @@ class testpalindrome(unittest.TestCase):
             }
         
         print('\tdetails : ', details, '\n')
-        print(f'>>> Test[{self.i}] Succesful!\n')
+        print(f'>>> Test[{self.i}] Successful!\n')
         print("___"*30, '\n')
         
         testpalindrome.i += 1
@@ -561,7 +561,7 @@ class testrorschach(unittest.TestCase):
             }
         
         print('\tdetails : ', details, '\n')
-        print(f'>>> Test[{self.i}] Succesful!\n')
+        print(f'>>> Test[{self.i}] Successful!\n')
         print("- - "*18)
         
         testrorschach.i += 1
@@ -601,7 +601,7 @@ class testrorschach(unittest.TestCase):
             }
         
         print('\tdetails : ', details, '\n')
-        print(f'>>> Test[{self.i}] Succesful!\n')
+        print(f'>>> Test[{self.i}] Successful!\n')
         print("- - "*18)
         
         testrorschach.i += 1
@@ -638,7 +638,7 @@ class testrorschach(unittest.TestCase):
             }
         
         print('\tdetails : ', details, '\n')
-        print(f'>>> Test[{self.i}] Succesful!\n')
+        print(f'>>> Test[{self.i}] Successful!\n')
         print("- - "*18)
         
         testrorschach.i += 1
@@ -676,7 +676,7 @@ class testrorschach(unittest.TestCase):
             }
         
         print('\tdetails : ', details, '\n')
-        print(f'>>> Test[{self.i}] Succesful!\n')
+        print(f'>>> Test[{self.i}] Successful!\n')
         print("___"*30, '\n')
         
         testrorschach.i += 1
@@ -723,7 +723,7 @@ class testthovex(unittest.TestCase):
             }
         
         print('\tdetails : ', details, '\n')
-        print(f'>>> Test[{self.i}] Succesful!\n')
+        print(f'>>> Test[{self.i}] Successful!\n')
         print("- - "*18)
         
         testthovex.i += 1
@@ -759,7 +759,7 @@ class testthovex(unittest.TestCase):
             }
         
         print('\tdetails : ', details, '\n')
-        print(f'>>> Test[{self.i}] Succesful!\n')
+        print(f'>>> Test[{self.i}] Successful!\n')
         print("- - "*18)
         
         testthovex.i += 1
@@ -794,7 +794,7 @@ class testthovex(unittest.TestCase):
             }
         
         print('\tdetails : ', details, '\n')
-        print(f'>>> Test[{self.i}] Succesful!\n')
+        print(f'>>> Test[{self.i}] Successful!\n')
         print("- - "*18)
         
         testthovex.i += 1
@@ -830,7 +830,7 @@ class testthovex(unittest.TestCase):
             }
         
         print('\tdetails : ', details, '\n')
-        print(f'>>> Test[{self.i}] Succesful!\n')
+        print(f'>>> Test[{self.i}] Successful!\n')
         # print("- - "*18)
         
         testthovex.i += 1
