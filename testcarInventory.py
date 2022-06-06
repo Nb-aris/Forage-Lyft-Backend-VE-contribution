@@ -16,9 +16,9 @@ from datetime import datetime
 # from Engine.Sternman_engine import sternman
 # from Engine.Willoughby_engine import willoughby
 # from Battery.Nubbin import nubbin
-# from Battery.Spindler import spindler
-# from Tires.carrigan_tires import CarriganTires
-# from Tires.octoprime_tires import OctoprimeTires
+from Battery.Spindler import spindler
+from Tires.carrigan_tires import CarriganTires
+from Tires.octoprime_tires import OctoprimeTires
 
 from carFactory import Model
 
@@ -36,7 +36,7 @@ class testcalliope(unittest.TestCase):
         print('..............................testing calliope''\'s'' fleet........................')
         print()
         self.i = testcalliope.i
-        print(f'[{self.i}] testing if Battery should be serviced...')
+        print(f'[{self.i}] testing if Battery should be serviced on calliope model...')
         print()
         
         today = datetime.today().date()
@@ -56,9 +56,11 @@ class testcalliope(unittest.TestCase):
         
         
         
-        # self.assertEqual(car1, car2, 'checking')
-        # self.assertNotEqual(car2.serviceAvailable('engine'), 'capulet engine')
-        # self.assertNotEqual(car2.serviceAvailable('battery'), 'spindler battery')
+        
+        
+        self.assertNotEqual(car1, car2, 'checking')
+        self.assertEqual(car2.serviceAvailable('engine'), 'capulet engine')
+        self.assertEqual(car2.serviceAvailable('battery'), 'spindler battery')
         self.assertEqual(car1.modelName(), car2.modelName())
         self.assertTrue(car1.needService())
         
@@ -72,12 +74,12 @@ class testcalliope(unittest.TestCase):
         print("- - "*18)
         
         testcalliope.i += 1
-        return
+    
         
         
     def testBattery_should_not_be_serviced(self):
         self.i = testcalliope.i
-        print(f'[{self.i}] testing if Battery should not be serviced...')
+        print(f'[{self.i}] testing if Battery should not be serviced on calliope model...')
         print()
         today = datetime.today().date()
         last_serv_date = today.replace(year = today.year - 1)
@@ -110,7 +112,7 @@ class testcalliope(unittest.TestCase):
     def testEngine_should_be_serviced(self):
         
         self.i = testcalliope.i
-        print(f'[{self.i}] testing if Engine should be serviced...')
+        print(f'[{self.i}] testing if Engine should be serviced on calliope model...')
         print()
         
         today = datetime.today().date()
@@ -145,7 +147,7 @@ class testcalliope(unittest.TestCase):
     def testEngine_should_not_be_serviced(self):
         
         self.i = testcalliope.i
-        print(f'[{self.i}] testing if Engine should not be serviced...')
+        print(f'[{self.i}] testing if Engine should not be serviced on calliope model...')
         print()
         
         today = datetime.today().date()
@@ -172,9 +174,231 @@ class testcalliope(unittest.TestCase):
         
         print('\tdetails : ', details, '\n')
         print(f'>>> Test[{self.i}] Successful!\n')
-        print("___"*30, '\n')
+        print("- - "*18)
         
         testcalliope.i += 1
+        
+        
+         
+    def testupgradedBattery_should_be_serviced(self):
+        
+        self.i = testcalliope.i
+        print(f'[{self.i}] testing if upgrading battery on calliope model possible Test(1)...')
+        print()
+        
+        
+        today = datetime.today().date()
+        last_serv_date = today.replace(year = today.year - 4)
+
+        parameters = {
+            
+            'currentDate': today,
+            'lastServiceDate': last_serv_date,
+            'currentMiles': 0,
+            'lastServiceMiles': 0
+            }
+    
+        
+        
+        car1 = Model.calliope(parameters)
+        car1.modifyConst('battery', 3)
+        
+        
+        self.assertTrue(car1.needService())
+        
+        
+        
+        print(f'>>> Test[{self.i}] Successful!\n')
+        print("- - "*18)
+        
+        testcalliope.i += 1
+        
+        
+    def testupgradedBattery_should_not_be_serviced(self):
+        
+        self.i = testcalliope.i
+        print(f'[{self.i}] testing if upgrading battery on calliope model possible(Test 2)...')
+        print()
+        
+        
+        today = datetime.today().date()
+        last_serv_date = today.replace(year = today.year - 2)
+
+        parameters = {
+            
+            'currentDate': today,
+            'lastServiceDate': last_serv_date,
+            'currentMiles': 0,
+            'lastServiceMiles': 0
+            }
+    
+        
+        
+        car1 = Model.calliope(parameters)
+        car1.modifyConst('battery', 3)
+        
+        
+        self.assertFalse(car1.needService())
+        
+        
+        
+        print(f'>>> Test[{self.i}] Successful!\n')
+        print("- - "*18)
+        
+        testcalliope.i += 1
+        
+        
+        
+    def testCarrigan_Tires_should_be_serviced(self):
+        
+        self.i = testcalliope.i
+        print(f'[{self.i}] testing if Carrigan tires should be serviced on calliope model...')
+        print()
+        
+        today = datetime.today().date()
+        last_serv_date = datetime.today().date()
+
+        parameters = {
+            
+            'currentDate': today,
+            'lastServiceDate': last_serv_date,
+            'currentMiles': 0,
+            'lastServiceMiles': 0
+            }
+    
+        
+        car1 = Model.calliope(parameters)
+        car1.addParameter('tireSensor', [0,0,0,1])
+        car1.setService('tire', CarriganTires(car1.getParameters()))
+        
+        
+        self.assertTrue(car1.needService())
+        
+        details = {
+            'engine type': car1.serviceAvailable('engine'), 
+            'battery type': car1.serviceAvailable('battery'),
+            'tire type': car1.serviceAvailable('tire')
+            }
+        
+        print('\tdetails : ', details, '\n')
+        print(f'>>> Test[{self.i}] Successful!\n')
+        print("- - "*18)
+        
+        testcalliope.i += 1
+        
+    def testCarriganTires_should_not_be_serviced(self):
+        
+        self.i = testcalliope.i
+        print(f'[{self.i}] testing if Carrigan Tires should not be serviced on calliope model...')
+        print()
+        
+        today = datetime.today().date()
+        last_serv_date = datetime.today().date()
+
+        parameters = {
+            
+            'currentDate': today,
+            'lastServiceDate': last_serv_date,
+            'currentMiles': 0,
+            'lastServiceMiles': 0
+            }
+    
+        
+        car1 = Model.calliope(parameters)
+        car1.addParameter('tireSensor', [0,0,0,0])
+        car1.setService('tire', CarriganTires(car1.getParameters()))
+        
+        
+        self.assertFalse(car1.needService())
+        
+        details = {
+            'engine type': car1.serviceAvailable('engine'), 
+            'battery type': car1.serviceAvailable('battery'),
+            'tire type': car1.serviceAvailable('tire')
+            }
+        
+        print('\tdetails : ', details, '\n')
+        print(f'>>> Test[{self.i}] Successful!\n')
+        print("- - "*18)
+        
+        testcalliope.i += 1
+        
+    def testOctoprimeTires_should_be_serviced(self):
+        
+        self.i = testcalliope.i
+        print(f'[{self.i}] testing if Octoprime Tires should be serviced on calliope model...')
+        print()
+        
+        today = datetime.today().date()
+        last_serv_date = datetime.today().date()
+
+        parameters = {
+            
+            'currentDate': today,
+            'lastServiceDate': last_serv_date,
+            'currentMiles': 0,
+            'lastServiceMiles': 0
+            }
+    
+        
+        car1 = Model.calliope(parameters)
+        car1.addParameter('tireSensor', [1,0,1,1])
+        car1.setService('tire', OctoprimeTires(car1.getParameters()))
+        
+        
+        self.assertTrue(car1.needService())
+        
+        details = {
+            'engine type': car1.serviceAvailable('engine'), 
+            'battery type': car1.serviceAvailable('battery'),
+            'tire type': car1.serviceAvailable('tire')
+            }
+        
+        print('\tdetails : ', details, '\n')
+        print(f'>>> Test[{self.i}] Successful!\n')
+        print("- - "*18)
+        
+        testcalliope.i += 1
+        
+    def testOctoprimeTires_should_not_be_serviced(self):
+        
+        
+        self.i = testcalliope.i
+        print(f'[{self.i}] testing if Octoprime Tires should not be serviced on calliope model...')
+        print()
+        
+        today = datetime.today().date()
+        last_serv_date = datetime.today().date()
+
+        parameters = {
+            
+            'currentDate': today,
+            'lastServiceDate': last_serv_date,
+            'currentMiles': 0,
+            'lastServiceMiles': 0
+            }
+    
+        
+        car1 = Model.calliope(parameters)
+        car1.addParameter('tireSensor', [0,0,0,0])
+        car1.setService('tire', OctoprimeTires(car1.getParameters()))
+        
+        
+        self.assertFalse(car1.needService())
+        
+        details = {
+            'engine type': car1.serviceAvailable('engine'), 
+            'battery type': car1.serviceAvailable('battery'),
+            'tire type': car1.serviceAvailable('tire')
+            }
+        
+        
+        print('\tdetails : ', details, '\n')
+        print(f'>>> Test[{self.i}] Successful!\n')
+        
+        testcalliope.i += 1
+        print("- - "*18)
+        
 
 class testglissade(unittest.TestCase):
     """
@@ -183,15 +407,14 @@ class testglissade(unittest.TestCase):
     """
     # print('testing model glissade')
     
-    i = 1
-    
+    i = 11
     def testBattery_should_be_serviced(self):
         print()
         print('.............................testing glissade''\'s'' fleet........................')
         print()
         
         self.i = testglissade.i
-        print(f'[{self.i}] testing if Battery should be serviced...')
+        print(f'[{self.i}] testing if Battery should be serviced on glissade model...')
         print()
         
         today = datetime.today().date()
@@ -227,7 +450,7 @@ class testglissade(unittest.TestCase):
     def testBattery_should_not_be_serviced(self):
         
         self.i = testglissade.i
-        print(f'[{self.i}] testing if Battery should not be serviced...')
+        print(f'[{self.i}] testing if Battery should not be serviced on glissade model...')
         print()
         
         today = datetime.today().date()
@@ -262,7 +485,7 @@ class testglissade(unittest.TestCase):
     def testEngine_should_be_serviced(self):
         
         self.i = testglissade.i
-        print(f'[{self.i}] testing if Engine should be serviced...')
+        print(f'[{self.i}] testing if Engine should be serviced on glissade model...')
         print()
         
         today = datetime.today().date()
@@ -297,7 +520,7 @@ class testglissade(unittest.TestCase):
     def testEngine_should_not_be_serviced(self):
         
         self.i = testglissade.i
-        print(f'[{self.i}] testing if Engine should not be serviced...')
+        print(f'[{self.i}] testing if Engine should not be serviced on glissade model...')
         print()
         
         today = datetime.today().date()
@@ -324,6 +547,225 @@ class testglissade(unittest.TestCase):
         
         print('\tdetails : ', details, '\n')
         print(f'>>> Test[{self.i}] Successful!\n')
+        print("- - "*18)
+        
+        testglissade.i += 1
+        
+        
+    def testupgradedBattery_should_be_serviced(self):
+        
+        self.i = testglissade.i
+        print(f'[{self.i}] testing if upgrading battery on glissade model possible Test(1)...')
+        print()
+        
+        
+        today = datetime.today().date()
+        last_serv_date = today.replace(year = today.year - 3)
+
+        parameters = {
+            
+            'currentDate': today,
+            'lastServiceDate': last_serv_date,
+            'currentMiles': 0,
+            'lastServiceMiles': 0
+            }
+    
+        
+        
+        car1 = Model.glissade(parameters)
+        car1.modifyConst('battery', 3)
+        
+        
+        self.assertFalse(car1.needService())
+        
+        
+        
+        print(f'>>> Test[{self.i}] Successful!\n')
+        print("- - "*18)
+        
+        testglissade.i += 1
+        
+        
+    def testupgradedBattery_should_not_be_serviced(self):
+        
+        self.i = testglissade.i
+        print(f'[{self.i}] testing if upgrading battery on glissade model possible(Test 2)...')
+        print()
+        
+        
+        today = datetime.today().date()
+        last_serv_date = today.replace(year = today.year - 3)
+
+        parameters = {
+            
+            'currentDate': today,
+            'lastServiceDate': last_serv_date,
+            'currentMiles': 0,
+            'lastServiceMiles': 0
+            }
+    
+        
+        
+        car1 = Model.glissade(parameters)
+        car1.modifyConst('battery', 3)
+        
+        
+        self.assertFalse(car1.needService())
+        
+        
+        
+        print(f'>>> Test[{self.i}] Successful!\n')
+        print("- - "*18)
+        
+        testglissade.i += 1
+        
+        
+    def testCarrigan_Tires_should_be_serviced(self):
+        
+        self.i = testglissade.i
+        print(f'[{self.i}] testing if Carrigan tires should be serviced on glissade model...')
+        print()
+        
+        today = datetime.today().date()
+        last_serv_date = datetime.today().date()
+
+        parameters = {
+            
+            'currentDate': today,
+            'lastServiceDate': last_serv_date,
+            'currentMiles': 0,
+            'lastServiceMiles': 0
+            }
+    
+        
+        car1 = Model.glissade(parameters)
+        car1.addParameter('tireSensor', [0,0,0,1])
+        car1.setService('tire', CarriganTires(car1.getParameters()))
+        
+        
+        self.assertTrue(car1.needService())
+        
+        details = {
+            'engine type': car1.serviceAvailable('engine'), 
+            'battery type': car1.serviceAvailable('battery'),
+            'tire type': car1.serviceAvailable('tire')
+            }
+        
+        print('\tdetails : ', details, '\n')
+        print(f'>>> Test[{self.i}] Successful!\n')
+        print("- - "*18)
+        
+        testglissade.i += 1
+        
+    def testCarriganTires_should_not_be_serviced(self):
+        
+        self.i = testglissade.i
+        print(f'[{self.i}] testing if Carrigan Tires should not be serviced on glissade model...')
+        print()
+        
+        today = datetime.today().date()
+        last_serv_date = datetime.today().date()
+
+        parameters = {
+            
+            'currentDate': today,
+            'lastServiceDate': last_serv_date,
+            'currentMiles': 0,
+            'lastServiceMiles': 0
+            }
+    
+        
+        car1 = Model.glissade(parameters)
+        car1.addParameter('tireSensor', [0,0,0,0])
+        car1.setService('tire', CarriganTires(car1.getParameters()))
+        
+        
+        self.assertFalse(car1.needService())
+        
+        details = {
+            'engine type': car1.serviceAvailable('engine'), 
+            'battery type': car1.serviceAvailable('battery'),
+            'tire type': car1.serviceAvailable('tire')
+            }
+        
+        print('\tdetails : ', details, '\n')
+        print(f'>>> Test[{self.i}] Successful!\n')
+        print("- - "*18)
+        
+        testglissade.i += 1
+        
+    def testOctoprimeTires_should_be_serviced(self):
+        
+        self.i = testglissade.i
+        print(f'[{self.i}] testing if Octoprime Tires should be serviced on glissade model...')
+        print()
+        
+        today = datetime.today().date()
+        last_serv_date = datetime.today().date()
+
+        parameters = {
+            
+            'currentDate': today,
+            'lastServiceDate': last_serv_date,
+            'currentMiles': 0,
+            'lastServiceMiles': 0
+            }
+    
+        
+        car1 = Model.glissade(parameters)
+        car1.addParameter('tireSensor', [1,0,1,1])
+        car1.setService('tire', OctoprimeTires(car1.getParameters()))
+        
+        
+        self.assertTrue(car1.needService())
+        
+        details = {
+            'engine type': car1.serviceAvailable('engine'), 
+            'battery type': car1.serviceAvailable('battery'),
+            'tire type': car1.serviceAvailable('tire')
+            }
+        
+        print('\tdetails : ', details, '\n')
+        print(f'>>> Test[{self.i}] Successful!\n')
+        print("- - "*18)
+        
+        testglissade.i += 1
+        
+    def testOctoprimeTires_should_not_be_serviced(self):
+        
+        
+        self.i = testglissade.i
+        print(f'[{self.i}] testing if Octoprime Tires should not be serviced on glissade model...')
+        print()
+        
+        today = datetime.today().date()
+        last_serv_date = datetime.today().date()
+
+        parameters = {
+            
+            'currentDate': today,
+            'lastServiceDate': last_serv_date,
+            'currentMiles': 0,
+            'lastServiceMiles': 0
+            }
+    
+        
+        car1 = Model.glissade(parameters)
+        car1.addParameter('tireSensor', [0,0,0,0])
+        car1.setService('tire', OctoprimeTires(car1.getParameters()))
+        
+        
+        self.assertFalse(car1.needService())
+        
+        details = {
+            'engine type': car1.serviceAvailable('engine'), 
+            'battery type': car1.serviceAvailable('battery'),
+            'tire type': car1.serviceAvailable('tire')
+            }
+        
+        
+        print('\tdetails : ', details, '\n')
+        print(f'>>> Test[{self.i}] Successful!\n')
         print("___"*30, '\n')
         
         testglissade.i += 1
@@ -333,7 +775,7 @@ class testpalindrome(unittest.TestCase):
     testing bettery: sternman
             engine:spindler
     """
-    i = 1
+    i = 21
     
     def testBattery_should_be_serviced(self):
         print()
@@ -341,7 +783,7 @@ class testpalindrome(unittest.TestCase):
         print()
         
         self.i = testpalindrome.i
-        print(f'[{self.i}] testing if Battery should be serviced...')
+        print(f'[{self.i}] testing if Battery should be serviced on palindrome model...')
         print()
         
         today = datetime.today().date()
@@ -378,7 +820,7 @@ class testpalindrome(unittest.TestCase):
     def testBattery_should_not_be_serviced(self):
         
         self.i = testpalindrome.i
-        print(f'[{self.i}] testing if Battery should not be serviced...')
+        print(f'[{self.i}] testing if Battery should not be serviced on palindrome model...')
         print()
         
         today = datetime.today().date()
@@ -415,7 +857,7 @@ class testpalindrome(unittest.TestCase):
     def testEngine_should_be_serviced(self):
         
         self.i = testpalindrome.i
-        print(f'[{self.i}] testing if Engine should be serviced...')
+        print(f'[{self.i}] testing if Engine should be serviced on palindrome model...')
         print()
         
         today = datetime.today().date()
@@ -452,7 +894,7 @@ class testpalindrome(unittest.TestCase):
     def testEngine_should_not_be_serviced(self):
         
         self.i = testpalindrome.i
-        print(f'[{self.i}] testing if Engine should not be serviced...')
+        print(f'[{self.i}] testing if Engine should not be serviced on palindrome model...')
         print()
         
         today = datetime.today().date()
@@ -479,6 +921,156 @@ class testpalindrome(unittest.TestCase):
             'engine type': car1.serviceAvailable('engine'), 
             'battery type': car1.serviceAvailable('battery')
             }
+        
+        print('\tdetails : ', details, '\n')
+        print(f'>>> Test[{self.i}] Successful!\n')
+        print("___"*30, '\n')
+        
+        testpalindrome.i += 1
+        
+    def testCarrigan_Tires_should_be_serviced(self):
+        
+        self.i = testpalindrome.i
+        print(f'[{self.i}] testing if Carrigan tires should be serviced on palindrome model...')
+        print()
+        
+        today = datetime.today().date()
+        last_serv_date = datetime.today().date()
+
+        parameters = {
+            
+            'currentDate': today,
+            'lastServiceDate': last_serv_date,
+            'currentMiles': 0,
+            'lastServiceMiles': 0
+            }
+    
+        parameters['engineLight'] = False
+        car1 = Model.palindrome(parameters)
+        car1.addParameter('tireSensor', [0,0,0,1])
+        car1.setService('tire', CarriganTires(car1.getParameters()))
+        
+        
+        self.assertTrue(car1.needService())
+        
+        details = {
+            'engine type': car1.serviceAvailable('engine'), 
+            'battery type': car1.serviceAvailable('battery'),
+            'tire type': car1.serviceAvailable('tire')
+            }
+        
+        print('\tdetails : ', details, '\n')
+        print(f'>>> Test[{self.i}] Successful!\n')
+        print("- - "*18)
+        
+        testpalindrome.i += 1
+        
+    def testCarriganTires_should_not_be_serviced(self):
+        
+        self.i = testpalindrome.i
+        print(f'[{self.i}] testing if Carrigan Tires should not be serviced on palindrome model...')
+        print()
+        
+        today = datetime.today().date()
+        last_serv_date = datetime.today().date()
+
+        parameters = {
+            
+            'currentDate': today,
+            'lastServiceDate': last_serv_date,
+            'currentMiles': 0,
+            'lastServiceMiles': 0
+            }
+    
+        parameters['engineLight'] = False
+        car1 = Model.palindrome(parameters)
+        car1.addParameter('tireSensor', [0,0,0,0])
+        car1.setService('tire', CarriganTires(car1.getParameters()))
+        
+        
+        self.assertFalse(car1.needService())
+        
+        details = {
+            'engine type': car1.serviceAvailable('engine'), 
+            'battery type': car1.serviceAvailable('battery'),
+            'tire type': car1.serviceAvailable('tire')
+            }
+        
+        print('\tdetails : ', details, '\n')
+        print(f'>>> Test[{self.i}] Successful!\n')
+        print("- - "*18)
+        
+        testpalindrome.i += 1
+        
+    def testOctoprimeTires_should_be_serviced(self):
+        
+        self.i = testpalindrome.i
+        print(f'[{self.i}] testing if Octoprime Tires should be serviced on palindrome model...')
+        print()
+        
+        today = datetime.today().date()
+        last_serv_date = datetime.today().date()
+
+        parameters = {
+            
+            'currentDate': today,
+            'lastServiceDate': last_serv_date,
+            'currentMiles': 0,
+            'lastServiceMiles': 0
+            }
+    
+        parameters['engineLight'] = False
+        car1 = Model.palindrome(parameters)
+        car1.addParameter('tireSensor', [1,0,1,1])
+        car1.setService('tire', OctoprimeTires(car1.getParameters()))
+        
+        
+        self.assertTrue(car1.needService())
+        
+        details = {
+            'engine type': car1.serviceAvailable('engine'), 
+            'battery type': car1.serviceAvailable('battery'),
+            'tire type': car1.serviceAvailable('tire')
+            }
+        
+        print('\tdetails : ', details, '\n')
+        print(f'>>> Test[{self.i}] Successful!\n')
+        print("- - "*18)
+        
+        testpalindrome.i += 1
+        
+    def testOctoprimeTires_should_not_be_serviced(self):
+        
+        
+        self.i = testpalindrome.i
+        print(f'[{self.i}] testing if Octoprime Tires should not be serviced on palindrome model...')
+        print()
+        
+        today = datetime.today().date()
+        last_serv_date = datetime.today().date()
+
+        parameters = {
+            
+            'currentDate': today,
+            'lastServiceDate': last_serv_date,
+            'currentMiles': 0,
+            'lastServiceMiles': 0
+            }
+    
+        parameters['engineLight'] = False
+        car1 = Model.palindrome(parameters)
+        car1.addParameter('tireSensor', [0,0,0,0])
+        car1.setService('tire', OctoprimeTires(car1.getParameters()))
+        
+        
+        self.assertFalse(car1.needService())
+        
+        details = {
+            'engine type': car1.serviceAvailable('engine'), 
+            'battery type': car1.serviceAvailable('battery'),
+            'tire type': car1.serviceAvailable('tire')
+            }
+        
         
         print('\tdetails : ', details, '\n')
         print(f'>>> Test[{self.i}] Successful!\n')
@@ -493,7 +1085,7 @@ class testrorschach(unittest.TestCase):
             engine:spindler
     """
     
-    i = 1
+    i = 29
     
     def testBattery_should_be_serviced(self):
         print()
@@ -501,7 +1093,7 @@ class testrorschach(unittest.TestCase):
         print()
         
         self.i = testrorschach.i
-        print(f'[{self.i}] testing if Battery should be serviced...')
+        print(f'[{self.i}] testing if Battery should be serviced on rorschach model...')
         print()
         
         today = datetime.today().date()
@@ -538,7 +1130,7 @@ class testrorschach(unittest.TestCase):
     def testBattery_should_not_be_serviced(self):
         
         self.i = testrorschach.i
-        print(f'[{self.i}] testing if Battery should not be serviced...')
+        print(f'[{self.i}] testing if Battery should not be serviced on rorschach model...')
         print()
         
         today = datetime.today().date()
@@ -573,7 +1165,7 @@ class testrorschach(unittest.TestCase):
     def testEngine_should_be_serviced(self):
         
         self.i = testrorschach.i
-        print(f'[{self.i}] testing if Engine should be serviced...')
+        print(f'[{self.i}] testing if Engine should be serviced on rorschach model...')
         print()
         
         today = datetime.today().date()
@@ -608,7 +1200,7 @@ class testrorschach(unittest.TestCase):
     def testEngine_should_not_be_serviced(self):
         
         self.i = testrorschach.i
-        print(f'[{self.i}] testing if Engine should not be serviced...')
+        print(f'[{self.i}] testing if Engine should not be serviced on rorschach model...')
         print()
         
         today = datetime.today().date()
@@ -638,6 +1230,157 @@ class testrorschach(unittest.TestCase):
         print("___"*30, '\n')
         
         testrorschach.i += 1
+        
+        
+    def testCarrigan_Tires_should_be_serviced(self):
+        
+        self.i = testrorschach.i
+        print(f'[{self.i}] testing if Carrigan tires should be serviced on rorschach model...')
+        print()
+        
+        today = datetime.today().date()
+        last_serv_date = datetime.today().date()
+
+        parameters = {
+            
+            'currentDate': today,
+            'lastServiceDate': last_serv_date,
+            'currentMiles': 0,
+            'lastServiceMiles': 0
+            }
+    
+        
+        car1 = Model.rorschach(parameters)
+        car1.addParameter('tireSensor', [0,0,0,1])
+        car1.setService('tire', CarriganTires(car1.getParameters()))
+        
+        
+        self.assertTrue(car1.needService())
+        
+        details = {
+            'engine type': car1.serviceAvailable('engine'), 
+            'battery type': car1.serviceAvailable('battery'),
+            'tire type': car1.serviceAvailable('tire')
+            }
+        
+        print('\tdetails : ', details, '\n')
+        print(f'>>> Test[{self.i}] Successful!\n')
+        print("- - "*18)
+        
+        testrorschach.i += 1
+        
+    def testCarriganTires_should_not_be_serviced(self):
+        
+        self.i = testrorschach.i
+        print(f'[{self.i}] testing if Carrigan Tires should not be serviced on rorschach model...')
+        print()
+        
+        today = datetime.today().date()
+        last_serv_date = datetime.today().date()
+
+        parameters = {
+            
+            'currentDate': today,
+            'lastServiceDate': last_serv_date,
+            'currentMiles': 0,
+            'lastServiceMiles': 0
+            }
+    
+        
+        car1 = Model.rorschach(parameters)
+        car1.addParameter('tireSensor', [0,0,0,0])
+        car1.setService('tire', CarriganTires(car1.getParameters()))
+        
+        
+        self.assertFalse(car1.needService())
+        
+        details = {
+            'engine type': car1.serviceAvailable('engine'), 
+            'battery type': car1.serviceAvailable('battery'),
+            'tire type': car1.serviceAvailable('tire')
+            }
+        
+        print('\tdetails : ', details, '\n')
+        print(f'>>> Test[{self.i}] Successful!\n')
+        print("- - "*18)
+        
+        testrorschach.i += 1
+        
+    def testOctoprimeTires_should_be_serviced(self):
+        
+        self.i = testrorschach.i
+        print(f'[{self.i}] testing if Octoprime Tires should be serviced on rorschach model...')
+        print()
+        
+        today = datetime.today().date()
+        last_serv_date = datetime.today().date()
+
+        parameters = {
+            
+            'currentDate': today,
+            'lastServiceDate': last_serv_date,
+            'currentMiles': 0,
+            'lastServiceMiles': 0
+            }
+    
+        
+        car1 = Model.rorschach(parameters)
+        car1.addParameter('tireSensor', [1,0,1,1])
+        car1.setService('tire', OctoprimeTires(car1.getParameters()))
+        
+        
+        self.assertTrue(car1.needService())
+        
+        details = {
+            'engine type': car1.serviceAvailable('engine'), 
+            'battery type': car1.serviceAvailable('battery'),
+            'tire type': car1.serviceAvailable('tire')
+            }
+        
+        print('\tdetails : ', details, '\n')
+        print(f'>>> Test[{self.i}] Successful!\n')
+        print("- - "*18)
+        
+        testrorschach.i += 1
+        
+    def testOctoprimeTires_should_not_be_serviced(self):
+        
+        
+        self.i = testrorschach.i
+        print(f'[{self.i}] testing if Octoprime Tires should not be serviced on rorschach model...')
+        print()
+        
+        today = datetime.today().date()
+        last_serv_date = datetime.today().date()
+
+        parameters = {
+            
+            'currentDate': today,
+            'lastServiceDate': last_serv_date,
+            'currentMiles': 0,
+            'lastServiceMiles': 0
+            }
+    
+        
+        car1 = Model.rorschach(parameters)
+        car1.addParameter('tireSensor', [0,0,0,0])
+        car1.setService('tire', OctoprimeTires(car1.getParameters()))
+        
+        
+        self.assertFalse(car1.needService())
+        
+        details = {
+            'engine type': car1.serviceAvailable('engine'), 
+            'battery type': car1.serviceAvailable('battery'),
+            'tire type': car1.serviceAvailable('tire')
+            }
+        
+        
+        print('\tdetails : ', details, '\n')
+        print(f'>>> Test[{self.i}] Successful!\n')
+        print("___"*30, '\n')
+        
+        testrorschach.i += 1
 
         
 class testthovex(unittest.TestCase):
@@ -646,7 +1389,7 @@ class testthovex(unittest.TestCase):
             engine:spindler
     """
     
-    i = 1
+    i = 37
     
     def testBattery_should_be_serviced(self):
         print()
@@ -654,7 +1397,7 @@ class testthovex(unittest.TestCase):
         print()
         
         self.i = testthovex.i
-        print(f'[{self.i}] testing if Battery should be serviced...')
+        print(f'[{self.i}] testing if Battery should be serviced on thovex model...')
         print()
         
         today = datetime.today().date()
@@ -688,7 +1431,7 @@ class testthovex(unittest.TestCase):
     def testBattery_should_not_be_serviced(self):
         
         self.i = testthovex.i
-        print(f'[{self.i}] testing if Battery should not be serviced...')
+        print(f'[{self.i}] testing if Battery should not be serviced on thovex model...')
         print()
         
         today = datetime.today().date()
@@ -720,7 +1463,7 @@ class testthovex(unittest.TestCase):
     def testEngine_should_be_serviced(self):
         
         self.i = testthovex.i
-        print(f'[{self.i}] testing if Engine should be serviced...')
+        print(f'[{self.i}] testing if Engine should be serviced on thovex model...')
         print()
         
         today = datetime.today().date()
@@ -753,7 +1496,7 @@ class testthovex(unittest.TestCase):
     def testEngine_should_not_be_serviced(self):
         
         self.i = testthovex.i
-        print(f'[{self.i}] testing if Engine should not be serviced...')
+        print(f'[{self.i}] testing if Engine should not be serviced on thovex model...')
         print()
         
         today = datetime.today().date()
@@ -778,10 +1521,195 @@ class testthovex(unittest.TestCase):
         
         print('\tdetails : ', details, '\n')
         print(f'>>> Test[{self.i}] Successful!\n')
-        # print("- - "*18)
+        print("- - "*18)
         
         testthovex.i += 1
+        
+    def testModifiedParametes(self):
+        
+        self.i = testthovex.i
+        print(f'[{self.i}] testing changing battery on thovex from nubbin to spindler...')
+        print()
+        
+        today = datetime.today().date()
+        last_serv_date = datetime.today().date()
+        
+        parameters = {
+            
+            'currentDate': today,
+            'lastServiceDate': last_serv_date,
+            'currentMiles': 30000,
+            'lastServiceMiles': 0
+            }
+        
+        car1 = Model.thovex(parameters)
+        
+        self.assertEqual(car1.serviceAvailable('battery'), 'nubbin battery')
+        
+        car1.setService('battery', spindler(parameters))
 
+        self.assertNotEqual(car1.serviceAvailable('battery'), 'nubbin battery')
+        
+        details = {
+            'engine type': car1.serviceAvailable('engine'), 
+            'battery type': car1.serviceAvailable('battery')
+            }
+        
+        print('\tdetails : ', details, '\n')
+        print(f'>>> Test[{self.i}] Successful!\n')
+        print("- - "*18)
+        
+        testthovex.i += 1
+        
+    def testCarrigan_Tires_should_be_serviced(self):
+        
+        self.i = testthovex.i
+        print(f'[{self.i}] testing if Carrigan tires should be serviced on thovex model...')
+        print()
+        
+        today = datetime.today().date()
+        last_serv_date = datetime.today().date()
+
+        parameters = {
+            
+            'currentDate': today,
+            'lastServiceDate': last_serv_date,
+            'currentMiles': 0,
+            'lastServiceMiles': 0
+            }
+    
+        
+        car1 = Model.thovex(parameters)
+        car1.addParameter('tireSensor', [0,0,0,1])
+        car1.setService('tire', CarriganTires(car1.getParameters()))
+        
+        
+        self.assertTrue(car1.needService())
+        
+        details = {
+            'engine type': car1.serviceAvailable('engine'), 
+            'battery type': car1.serviceAvailable('battery'),
+            'tire type': car1.serviceAvailable('tire')
+            }
+        
+        print('\tdetails : ', details, '\n')
+        print(f'>>> Test[{self.i}] Successful!\n')
+        print("- - "*18)
+        
+        testthovex.i += 1
+        
+    def testCarriganTires_should_not_be_serviced(self):
+        
+        self.i = testthovex.i
+        print(f'[{self.i}] testing if Carrigan Tires should not be serviced on thovex model...')
+        print()
+        
+        today = datetime.today().date()
+        last_serv_date = datetime.today().date()
+
+        parameters = {
+            
+            'currentDate': today,
+            'lastServiceDate': last_serv_date,
+            'currentMiles': 0,
+            'lastServiceMiles': 0
+            }
+    
+        
+        car1 = Model.thovex(parameters)
+        car1.addParameter('tireSensor', [0,0,0,0])
+        car1.setService('tire', CarriganTires(car1.getParameters()))
+        
+        
+        self.assertFalse(car1.needService())
+        
+        details = {
+            'engine type': car1.serviceAvailable('engine'), 
+            'battery type': car1.serviceAvailable('battery'),
+            'tire type': car1.serviceAvailable('tire')
+            }
+        
+        print('\tdetails : ', details, '\n')
+        print(f'>>> Test[{self.i}] Successful!\n')
+        print("- - "*18)
+        
+        testthovex.i += 1
+        
+    def testOctoprimeTires_should_be_serviced(self):
+        
+        self.i = testthovex.i
+        print(f'[{self.i}] testing if Octoprime Tires should be serviced on thovex model...')
+        print()
+        
+        today = datetime.today().date()
+        last_serv_date = datetime.today().date()
+
+        parameters = {
+            
+            'currentDate': today,
+            'lastServiceDate': last_serv_date,
+            'currentMiles': 0,
+            'lastServiceMiles': 0
+            }
+    
+        
+        car1 = Model.thovex(parameters)
+        car1.addParameter('tireSensor', [1,0,1,1])
+        car1.setService('tire', OctoprimeTires(car1.getParameters()))
+        
+        
+        self.assertTrue(car1.needService())
+        
+        details = {
+            'engine type': car1.serviceAvailable('engine'), 
+            'battery type': car1.serviceAvailable('battery'),
+            'tire type': car1.serviceAvailable('tire')
+            }
+        
+        print('\tdetails : ', details, '\n')
+        print(f'>>> Test[{self.i}] Successful!\n')
+        print("- - "*18)
+        
+        testthovex.i += 1
+        
+    def testOctoprimeTires_should_not_be_serviced(self):
+        
+        
+        self.i = testthovex.i
+        print(f'[{self.i}] testing if Octoprime Tires should not be serviced on thovex model...')
+        print()
+        
+        today = datetime.today().date()
+        last_serv_date = datetime.today().date()
+
+        parameters = {
+            
+            'currentDate': today,
+            'lastServiceDate': last_serv_date,
+            'currentMiles': 0,
+            'lastServiceMiles': 0
+            }
+    
+        
+        car1 = Model.thovex(parameters)
+        car1.addParameter('tireSensor', [0,0,0,0])
+        car1.setService('tire', OctoprimeTires(car1.getParameters()))
+        
+        
+        self.assertFalse(car1.needService())
+        
+        details = {
+            'engine type': car1.serviceAvailable('engine'), 
+            'battery type': car1.serviceAvailable('battery'),
+            'tire type': car1.serviceAvailable('tire')
+            }
+        
+        
+        print('\tdetails : ', details, '\n')
+        print(f'>>> Test[{self.i}] Successful!\n')
+        # print("___"*30, '\n')
+        
+        testthovex.i += 1
 
 if __name__ == '__main__':
     

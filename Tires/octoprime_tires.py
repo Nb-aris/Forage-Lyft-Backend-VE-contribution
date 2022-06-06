@@ -10,9 +10,12 @@ from Tires.tyre import Tyre
 
 
 class OctoprimeTires(Tyre):
-    def __init__(self, four_tires):
+    def __init__(self, parameter):
         # assert(len(four_tires) == 4)
-        self.four_tires = four_tires
+        self.four_tires = parameter['tireSensor']
 
-    def needsService(self):
+    def needService(self):
         return sum(self.four_tires) >= 3
+    
+    def getName(self):
+        return 'octoprime tires'

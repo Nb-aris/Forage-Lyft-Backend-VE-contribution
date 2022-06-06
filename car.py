@@ -17,6 +17,9 @@ class car(Serviceable, ABC):
     # @abstractmethod
     def setService(self, serviceName: str, service: object) -> None:
         self.services[serviceName] = service
+        
+    def modifyConst(self, serviceName: str, modification) -> None:
+        self.services[serviceName].modifyConst(modification)
 
 
     # @abstractmethod

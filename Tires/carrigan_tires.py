@@ -9,10 +9,13 @@ from Tires.tyre import Tyre
 
 
 class CarriganTires(Tyre):
-    def __init__(self, four_tires):
-        assert(len(four_tires) == 4)
-        self.four_tires = four_tires
+    def __init__(self, parameter):
+        # assert(len(four_tires) == 4)
+        self.four_tires = parameter['tireSensor']
 
     def needService(self):
         return sum(x >= 0.9 for x in self.four_tires) > 0
+    
+    def getName(self):
+        return 'carrigan tires'
     
